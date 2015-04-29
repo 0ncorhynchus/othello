@@ -6,6 +6,7 @@ class Color:
     BLACK = 1
     WHITE = 2
 
+
 class Coordinate:
     def __init__(self, col, row):
         self._col = col
@@ -36,6 +37,14 @@ class Coordinate:
             raise TypeError("")
         return Coordinate(self.col + other[0],
                 self.row + other[1])
+
+    def __str__(self):
+        col_str = chr(self.col + ord('a'))
+        row_str = str(self.row + 1)
+        return col_str + row_str
+
+    def __repr__(self):
+        return str(self)
 
 
 class Board:
@@ -100,6 +109,15 @@ class Board:
                 return True
         return False
 
+    def list_available(self, color):
+        retval = []
+        for col in range(self.MAX_COLUMN):
+            for row in range(self.MAX_ROW):
+                coord = Coordinate(col, row)
+                if self.can_put(color, coord):
+                    retval.append(coord)
+        return retval
+
     def put(self, color, coord):
         if not self.can_put(color, coord):
             return False
@@ -113,4 +131,7 @@ class Board:
                 string += str(self._data[col][row])
             string += "\n"
         return string[:-1]
+
+    def __repr__(self):
+        return str(self)
 
