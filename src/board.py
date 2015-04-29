@@ -2,9 +2,17 @@
 
 
 class Color:
-    EMPTY = 0
-    BLACK = 1
-    WHITE = 2
+    EMPTY = 2
+    BLACK = 0
+    WHITE = 1
+
+    @classmethod
+    def next(cls, color):
+        if color == Color.BLACK:
+            return Color.WHITE
+        if color == Color.WHITE:
+            return Color.BLACK
+        return Color.EMPTY
 
 
 class Coordinate:
