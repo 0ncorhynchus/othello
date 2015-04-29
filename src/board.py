@@ -134,9 +134,9 @@ class Board:
 
     def __str__(self):
         row_strs = ['  a b c d e f g h']
-        for col in range(self.MAX_COLUMN):
-            rows = [str(col+1)]
-            for row in range(self.MAX_ROW):
+        for row in range(self.MAX_ROW):
+            rows = [str(row+1)]
+            for col in range(self.MAX_COLUMN):
                 color = self._data[col][row]
                 if color == Color.BLACK:
                     rows.append('X')
