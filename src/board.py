@@ -133,12 +133,19 @@ class Board:
         return True
 
     def __str__(self):
-        string = ""
+        row_strs = ['  a b c d e f g h']
         for col in range(self.MAX_COLUMN):
+            rows = [str(col+1)]
             for row in range(self.MAX_ROW):
-                string += str(self._data[col][row])
-            string += "\n"
-        return string[:-1]
+                color = self._data[col][row]
+                if color == Color.BLACK:
+                    rows.append('X')
+                elif color == Color.WHITE:
+                    rows.append('O')
+                else:
+                    rows.append(' ')
+            row_strs.append(' '.join(rows))
+        return '\n'.join(row_strs)
 
     def __repr__(self):
         return str(self)
