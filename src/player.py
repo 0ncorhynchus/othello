@@ -13,3 +13,6 @@ class Player:
     def is_registered(self):
         return self._game is not None
 
+    def has_turn(self):
+        pass
+

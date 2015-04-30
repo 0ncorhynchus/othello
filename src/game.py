@@ -26,6 +26,9 @@ class OthelloGame:
         player.game = self
         self._players[player.color] = player
 
+    def get_current_player(self):
+        return self._players[self._turn]
+
     def get_board(self):
         return self._board.to_list()
 
@@ -41,13 +44,18 @@ class OthelloGame:
         if not self._board.put(self._turn, coord):
             return False
 
+        self.update_turn()
+        if not self.has_finished():
+            self.get_current_player().has_turn()
+
+        return True
+
+    def update_turn(self):
         next_turn = Color.next(self._turn)
         if len(self._board.list_available(next_turn)) != 0:
             self._turn = next_turn
         elif len(self._board.list_available(self._turn)) == 0:
             self._turn = Color.EMPTY
             self._finished = True
-
-        return True
 
 
