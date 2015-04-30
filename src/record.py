@@ -29,7 +29,7 @@ def main():
         print ""
         print "Enter a coordinate"
         candidates = map(lambda o:str(o),
-                game._board.list_available(game.get_turn().color))
+                game.list_available(game.get_turn().color))
         print "Candidates: %s" % " ".join(candidates)
         try:
             print '>',
