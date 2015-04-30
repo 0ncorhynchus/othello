@@ -46,7 +46,8 @@ class BoardTest(unittest.TestCase):
 
     def test_to_list(self):
         wanted_list = self.board.to_list()
-        wanted_list[2][3] = Color.BLACK
+        wanted_list[2][3] = Color.BLACK     # c4
+        wanted_list[3][3] = Color.BLACK       # d4
         self.assertTrue(self.board.put(Color.BLACK,Coordinate(2,3)))
         self.assertEqual(self.board.to_list(), wanted_list)
 

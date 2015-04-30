@@ -93,29 +93,32 @@ class Board:
     def is_empty(self, coord):
         return self.at(coord) == Color.EMPTY
 
-    def can_put_with_direction(self, color, coord, direc):
-        exist_other = False
+    def list_reversed_in(self, color, coord, direc):
+        reversed_list = []
         next_point = coord + direc
         while self.is_in_range(next_point):
-            if self.is_empty(next_point):
-                return False
             next_color = self.at(next_point)
-            if not exist_other and next_color != color:
-                exist_other = True
+            if next_color == Color.EMPTY:
+                return []
             if next_color == color:
-                return exist_other
+                return reversed_list
+            reversed_list.append(next_point)
             next_point += direc
-        return False
+        return []
+
+    def list_reversed(self, color, coord):
+        if not self.is_in_range(coord):
+            return []
+        if not self.is_empty(coord):
+            return []
+        reversed_list = []
+        for direc in self.DIRECS:
+            reversed_list.extend(
+                    self.list_reversed_in(color, coord, direc))
+        return reversed_list
 
     def can_put(self, color, coord):
-        if not self.is_in_range(coord):
-            return False
-        if not self.is_empty(coord):
-            return False
-        for direc in self.DIRECS:
-            if self.can_put_with_direction(color, coord, direc):
-                return True
-        return False
+        return len(self.list_reversed(color, coord)) != 0
 
     def list_available(self, color):
         retval = []
@@ -127,9 +130,12 @@ class Board:
         return retval
 
     def put(self, color, coord):
-        if not self.can_put(color, coord):
+        reversed_list = self.list_reversed(color, coord)
+        if len(reversed_list) == 0:
             return False
         self._data[coord.col][coord.row] = color
+        for rev in reversed_list:
+            self._data[rev.col][rev.row] = color
         return True
 
     def __str__(self):
