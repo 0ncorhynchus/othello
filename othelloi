@@ -27,7 +27,7 @@ def select_color():
         print ">",
         instr = raw_input()
         if instr == '0':
-            return Color.BLAK
+            return Color.BLACK
         if instr == '1':
             return Color.WHITE
 
