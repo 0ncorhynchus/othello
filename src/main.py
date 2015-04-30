@@ -6,8 +6,8 @@ from game import OthelloGame
 
 def main():
     game = OthelloGame()
-    player_black = iPlayer(Color.BLACK)
-    player_white = iPlayer(Color.WHITE)
+    player_black = iPlayer("Player", Color.BLACK)
+    player_white = iPlayer("CP", Color.WHITE)
 
     game.register_player(player_black)
     game.register_player(player_white)

@@ -4,9 +4,14 @@ from board import Coordinate
 
 class Player:
 
-    def __init__(self, color):
+    def __init__(self, name, color):
+        self._name = name
         self._color = color
         self._game = None
+
+    @property
+    def name(self):
+        return self._name
 
     @property
     def color(self):
@@ -26,8 +31,8 @@ class iPlayer(Player):
 
     EXIT_STRINGS = ("quit", "exit", "give up", "retire")
 
-    def __init__(self, color):
-        Player.__init__(self, color)
+    def __init__(self, name, color):
+        Player.__init__(self, name, color)
 
     def step(self, string):
         coord = Coordinate.from_str(string)
