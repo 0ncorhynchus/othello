@@ -23,8 +23,8 @@ class OthelloGame(threading.Thread):
             return
 
         while not self.has_finished():
-            self.__notice_to_player()
             print self._board
+            self.__notice_to_player()
             self.__update_turn()
 
     def __notice_to_player(self):
