@@ -64,7 +64,7 @@ class OthelloGame(threading.Thread):
         self._finished = True
 
     def __update_turn(self):
-        next_turn = Color.next(self._turn)
+        next_turn = Color.opponent(self._turn)
         if len(self._board.list_available(next_turn)) != 0:
             self._turn = next_turn
         elif len(self._board.list_available(self._turn)) == 0:

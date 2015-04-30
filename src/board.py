@@ -7,7 +7,7 @@ class Color:
     WHITE = 1
 
     @classmethod
-    def next(cls, color):
+    def opponent(cls, color):
         if color == Color.BLACK:
             return Color.WHITE
         if color == Color.WHITE:
