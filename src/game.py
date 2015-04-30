@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+import threading
 from board import *
 
-class OthelloGame:
+class OthelloGame(threading.Thread):
 
     def __init__(self):
+        threading.Thread.__init__(self)
         self._board = Board()
         self._turn = Color.BLACK
         self._players = {}
@@ -16,9 +18,16 @@ class OthelloGame:
     def has_finished(self):
         return self._finished
 
-    def start(self):
-        if not self.is_ready() or self.has_finished():
+    def run(self):
+        if not self.is_ready():
             return
+
+        while not self.has_finished():
+            self.__notice_to_player()
+            print self._board
+            self.__update_turn()
+
+    def __notice_to_player(self):
         self.__get_current_player().has_turn()
 
     def register_player(self, player):
@@ -45,16 +54,7 @@ class OthelloGame:
             return False
         if player is not self.__get_current_player():
             return False
-
-        if not self._board.put(self._turn, coord):
-            return False
-
-        print self._board
-        self.update_turn()
-        if not self.has_finished():
-            self.__get_current_player().has_turn()
-
-        return True
+        return self._board.put(self._turn, coord)
 
     def list_available(self, color):
         return self._board.list_available(color)
@@ -63,7 +63,7 @@ class OthelloGame:
         self._turn = Color.EMPTY
         self._finished = True
 
-    def update_turn(self):
+    def __update_turn(self):
         next_turn = Color.next(self._turn)
         if len(self._board.list_available(next_turn)) != 0:
             self._turn = next_turn
