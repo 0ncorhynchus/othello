@@ -161,18 +161,21 @@ class Board:
         return self._data[coord.col][coord.row]
 
     def __str__(self):
-        row_strs = ['  a b c d e f g h']
+        line = '  ' + '-'*33
+        row_strs = ['    a   b   c   d   e   f   g   h', line]
         for row in range(self.MAX_ROW):
             rows = [str(row+1)]
+            row_str = str(row+1) + ' |'
             for col in range(self.MAX_COLUMN):
                 color = self.__get_piece(Coordinate(col,row))
                 if color == Color.BLACK:
-                    rows.append('X')
+                    row_str += ' X |'
                 elif color == Color.WHITE:
-                    rows.append('O')
+                    row_str += ' O |'
                 else:
-                    rows.append(' ')
-            row_strs.append(' '.join(rows))
+                    row_str += '   |'
+            row_strs.append(row_str)
+            row_strs.append(line)
         return '\n'.join(row_strs)
 
     def __repr__(self):

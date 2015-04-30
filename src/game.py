@@ -22,6 +22,8 @@ class OthelloGame(threading.Thread):
     def print_result(self):
         print "====== RESULT ======"
 
+        print self._board
+
         num_black = self._board.count(Color.BLACK)
         num_white = self._board.count(Color.WHITE)
         name_black = self._players[Color.BLACK].name
