@@ -6,15 +6,40 @@ sys.path.append('./src')
 
 from board import Color, Coordinate
 from player import iPlayer
+from cplayer import *
 from game import OthelloGame
+
+def select_opponent():
+    while True:
+        print "Select Opponent Player :"
+        print "   RandomPlayer(0)"
+        print "   FirstOrderPlayer(1)"
+        print ">",
+        instr = raw_input()
+        if instr == '0':
+            return RandomPlayer
+        if instr == '1':
+            return FirstOrderPlayer
+
+def select_color():
+    while True:
+        print "Select Your Color : Black(0) or White(1)"
+        print ">",
+        instr = raw_input()
+        if instr == '0':
+            return Color.BLAK
+        if instr == '1':
+            return Color.WHITE
 
 def main():
     game = OthelloGame()
-    player_black = iPlayer("Player", Color.BLACK)
-    player_white = iPlayer("CP", Color.WHITE)
+    OPPONENT_CLS = select_opponent()
+    color = select_color()
+    player = iPlayer("Player", color)
+    opponent = OPPONENT_CLS("CP", Color.opponent(color))
 
-    game.register_player(player_black)
-    game.register_player(player_white)
+    game.register_player(player)
+    game.register_player(opponent)
 
     game.start()
 
