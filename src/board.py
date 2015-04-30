@@ -69,7 +69,7 @@ class Board:
     def reset(self):
         for col in range(self.MAX_COLUMN):
             for row in range(self.MAX_ROW):
-                self.put(Color.EMPTY, Coordinate(col,row))
+                self._data[col][row] = Color.EMPTY
         self._data[3][4] = self._data[4][3] = Color.BLACK
         self._data[3][3] = self._data[4][4] = Color.WHITE
 
