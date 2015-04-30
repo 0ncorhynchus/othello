@@ -69,9 +69,11 @@ class Board:
     def reset(self):
         for col in range(self.MAX_COLUMN):
             for row in range(self.MAX_ROW):
-                self._data[col][row] = Color.EMPTY
-        self._data[3][4] = self._data[4][3] = Color.BLACK
-        self._data[3][3] = self._data[4][4] = Color.WHITE
+                self.set_piece(Color.EMPTY, Coordinate(col,row))
+        self.set_piece(Color.BLACK, Coordinate(3,4))    # d5
+        self.set_piece(Color.BLACK, Coordinate(4,3))    # e4
+        self.set_piece(Color.WHITE, Coordinate(3,3))    # d4
+        self.set_piece(Color.WHITE, Coordinate(4,4))    # e5
 
     def is_in_range(self, coord):
         return 0 <= coord.col < 8 and 0 <= coord.row < 8
@@ -79,14 +81,14 @@ class Board:
     def at(self, coord):
         if not self.is_in_range(coord):
             raise IndexError("board index out of range")
-        return self._data[coord.col][coord.row]
+        return self.get_piece(coord)
 
     def to_list(self):
         retval = []
         for col in range(self.MAX_COLUMN):
             tmp = []
             for row in range(self.MAX_ROW):
-                tmp.append(self._data[col][row])
+                tmp.append(self.get_piece(Coordinate(col,row)))
             retval.append(tmp)
         return retval
 
@@ -133,17 +135,29 @@ class Board:
         reversed_list = self.list_reversed(color, coord)
         if len(reversed_list) == 0:
             return False
-        self._data[coord.col][coord.row] = color
+        self.set_piece(color, coord)
         for rev in reversed_list:
-            self._data[rev.col][rev.row] = color
+            self.set_piece(color, rev)
         return True
+
+    def set_piece(self, color, coord):
+        """
+        without range check
+        """
+        self._data[coord.col][coord.row] = color
+
+    def get_piece(self, coord):
+        """
+        without range check
+        """
+        return self._data[coord.col][coord.row]
 
     def __str__(self):
         row_strs = ['  a b c d e f g h']
         for row in range(self.MAX_ROW):
             rows = [str(row+1)]
             for col in range(self.MAX_COLUMN):
-                color = self._data[col][row]
+                color = self.get_piece(Coordinate(col,row))
                 if color == Color.BLACK:
                     rows.append('X')
                 elif color == Color.WHITE:
