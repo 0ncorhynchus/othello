@@ -33,8 +33,14 @@ def select_color():
 
 def main():
     game = OthelloGame()
-    OPPONENT_CLS = select_opponent()
-    color = select_color()
+    try:
+        OPPONENT_CLS = select_opponent()
+        color = select_color()
+    except KeyboardInterrupt:
+        sys.exit(1)
+    except Exception as e:
+        print str(e)
+        sys.exit(2)
     player = iPlayer("Player", color)
     opponent = OPPONENT_CLS("CP", Color.opponent(color))
 
