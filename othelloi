@@ -14,12 +14,15 @@ def select_opponent():
         print "Select Opponent Player :"
         print "   RandomPlayer(0)"
         print "   FirstOrderPlayer(1)"
+        print "   MinimumPlayer(2)"
         print ">",
         instr = raw_input()
         if instr == '0':
             return RandomPlayer
         if instr == '1':
             return FirstOrderPlayer
+        if instr == '2':
+            return MinimumPlayer
 
 def select_color():
     while True:
