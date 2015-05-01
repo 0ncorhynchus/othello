@@ -11,12 +11,12 @@ from game import OthelloGame
 
 def select_opponent():
     while True:
-        print "Select Opponent Player :"
-        print "   RandomPlayer(0)"
-        print "   FirstOrderPlayer(1)"
-        print "   MinimumPlayer(2)"
-        print ">",
-        instr = raw_input()
+        print("Select Opponent Player :")
+        print("   RandomPlayer(0)")
+        print("   FirstOrderPlayer(1)")
+        print("   MinimumPlayer(2)")
+        print("> ", end='')
+        instr = input()
         if instr == '0':
             return RandomPlayer
         if instr == '1':
@@ -26,9 +26,9 @@ def select_opponent():
 
 def select_color():
     while True:
-        print "Select Your Color : Black(0) or White(1)"
-        print ">",
-        instr = raw_input()
+        print("Select Your Color : Black(0) or White(1)")
+        print("> ", end='')
+        instr = input()
         if instr == '0':
             return Color.BLACK
         if instr == '1':
@@ -42,7 +42,7 @@ def main():
     except KeyboardInterrupt:
         sys.exit(1)
     except Exception as e:
-        print str(e)
+        print(e)
         sys.exit(2)
     player = iPlayer("Player", color)
     opponent = OPPONENT_CLS("CP", Color.opponent(color))

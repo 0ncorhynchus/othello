@@ -63,7 +63,7 @@ class Board:
             (1,0), (-1,1), (0,1), (1,1)]
 
     def __init__(self):
-        self._data = [[Color.EMPTY] * 8 for i in xrange(8)]
+        self._data = [[Color.EMPTY] * 8 for i in range(8)]
         self.reset()
 
     def reset(self):

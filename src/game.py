@@ -20,32 +20,32 @@ class OthelloGame(threading.Thread):
         return self._finished
 
     def print_result(self):
-        print "====== RESULT ======"
+        print("====== RESULT ======")
 
-        print self._board
+        print(self._board)
 
         num_black = self._board.count(Color.BLACK)
         num_white = self._board.count(Color.WHITE)
         name_black = self._players[Color.BLACK].name
         name_white = self._players[Color.WHITE].name
-        print "%s : %d" % (name_black, num_black)
-        print "%s : %d" % (name_white, num_white)
+        print("%s : %d" % (name_black, num_black))
+        print("%s : %d" % (name_white, num_white))
 
         if self._winner is not None:
-            print "Winner : %s" % self._winner.name
+            print("Winner : %s" % self._winner.name)
         elif num_black > num_white:
-            print "Winner : %s" % name_black
+            print("Winner : %s" % name_black)
         elif num_black < num_white:
-            print "Winner : %s" % name_white
+            print("Winner : %s" % name_white)
         else:
-            print "Draw"
+            print("Draw")
 
     def run(self):
         if not self.is_ready():
             return
 
         while not self.has_finished():
-            print self._board
+            print(self._board)
             self.__notice_to_player()
             self.__update_turn()
 

@@ -39,20 +39,20 @@ class iPlayer(Player):
         return self._game.put(self, coord)
 
     def has_turn(self):
-        print "It comes to your turn!"
+        print("It comes to your turn!")
         candidates = map(lambda o:str(o),
                 self._game.list_available(self.color))
-        print "Candidates: %s" % " ".join(candidates)
-        print "Enter a coordinate."
+        print("Candidates: %s" % " ".join(candidates))
+        print("Enter a coordinate.")
         while True:
             try:
-                print '>',
-                instr = raw_input()
+                print('> ', end='')
+                instr = input()
                 if instr in iPlayer.EXIT_STRINGS:
                     self._game.set_retired(self.color)
                     return
                 if self.step(instr):
                     return
             except Exception as e:
-                print e
-            print "Enter a correct coordinate."
+                print(e)
+            print("Enter a correct coordinate.")
